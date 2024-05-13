@@ -35,7 +35,7 @@ read -p "次の選択肢から入力してください(Add Password/Get Password
 
 	"Exit")
 
-		echo "Thak you!"
+		echo "Thank you!"
 		exit
 		;;
 
