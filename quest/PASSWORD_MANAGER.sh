@@ -8,11 +8,12 @@ read -p "次の選択肢から入力してください(Add Password/Get Password
 
 	 	read -p "サービス名を入力してください:" service_name
 		read -p "ユーザー名を入力してください:"  user_name
-		read -p "パスワードを入力してください:" passward
+		read -p "パスワードを入力してください:" password
 
 		echo "${service_name}" >>service_name.txt
 		echo "${user_name}">>user_name.txt
-		echo "${passward}">>passward.txt
+		echo "${password}">>password.txt
+		echo "${password}" | gpg --symmetric --cipher-algo AES256 --output "${service_name}_password.gpg"
 		echo "パスワードの追加は成功しました。"
 
 		;;
