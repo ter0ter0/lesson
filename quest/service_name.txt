@@ -16,3 +16,7 @@ hoge
 1
 1
 1
+take
+ta
+ta
+ta

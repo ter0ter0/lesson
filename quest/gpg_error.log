@@ -1,0 +1,3 @@
+gpg: problem with the agent: Inappropriate ioctl for device
+gpg: error creating passphrase: Operation cancelled
+gpg: symmetric encryption of '[stdin]' failed: Operation cancelled
