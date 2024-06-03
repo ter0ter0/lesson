@@ -20,3 +20,7 @@ take
 ta
 ta
 ta
+2
+ta
+1
+1

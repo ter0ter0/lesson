@@ -1,5 +1,9 @@
 #! /bin/bash  
 echo "パスワードマネージャーへようこそ！"
+echo "GPGで設定したメールアドレスを入力して下さい"
+read gpg_email
+gpg_email="${gpg_email:?GPGのメールアドレスを入力して下さい}"
+
 while [ "$input" != "Exit" ]; do
 read -p "次の選択肢から入力してください(Add Password/Get Password/Exit)：" input
         case "$input" in
@@ -9,20 +13,18 @@ read -p "次の選択肢から入力してください(Add Password/Get Password
 	 	read -p "サービス名を入力してください:" service_name
 		read -p "ユーザー名を入力してください:"  user_name
 		read -p "パスワードを入力してください:" password
+		sudo  gpg -d password.gpg > password.txt 2> /dev/null
 
 		echo "${service_name}" >>service_name.txt
 		echo "${user_name}">>user_name.txt
 		echo "${password}">>password.txt
-		echo "DEBUG: GPG encryption command will be executed now."
-		echo "${password}" | gpg --symmetric --cipher-algo AES256 --output "${service_name}_password.gpg" 2> gpg_error.log
+		sudo  gpg -e -a -r "${gpg_email}" -o password.gpg password.txt
+
 		if [ $? -eq 0 ]; then
-                echo "暗号化されたパスワードファイルが ${service_name}_password.gpg として保存されました。"
-	            else
-                echo "パスワードファイルの保存に失敗しました。"
-        	    fi
-
-		echo "パスワードの追加は成功しました。"
-
+			echo "パスワードが追加され暗号化されました。"
+		else
+			echo "パスワードの保存に失敗しました。"
+		fi
 		;;
 
 	"Get Password")
