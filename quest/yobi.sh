@@ -13,7 +13,8 @@ read input
 case "$input" in
 
 "Next")
-	read -p  "メールアドレスを入力して下さい" mail
+	echo "メールアドレスを入力して下さい"
+	read mail
 		if [ "$mail" = "panicdepanic@gmail.com" ]; then
 
 			echo "暗号化ファイルを作成します"
